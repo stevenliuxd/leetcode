@@ -1,29 +1,31 @@
-def stack(string, i, j, arr, l, r):
-    if string[i] == l:
-        j += 1
-        arr[j] = l
-    if string[i] == r:
-        if j >= 0 and arr[j] == l:
-            arr[j] = None
-            j -= 1
-        else:
-            j += 1
-            arr[j] = r
-    return [j, arr]
+from collections import deque
 
 def isBalanced(string):
-    arr = [None] * len(string)
-    j = -1
-    for i in range(0, len(string)): # Time Complexity is O(n) where n is the number of elements in the string
-        [j, arr] = stack(string, i, j, arr, "(", ")")
-        [j, arr] = stack(string, i, j, arr, "[", "]")
-        [j, arr] = stack(string, i, j, arr, "{", "}")
-    if j == -1:
+
+    stack = deque()
+    hashmap = {
+        "{" : "}",
+        "[" : "]",
+        "(" : ")",
+    }
+
+    for i in string:
+        if i in hashmap:
+            stack.append(i)
+        elif i in hashmap.values():
+            other_pair = (list(hashmap.keys())[list(hashmap.values()).index(i)])
+            if len(stack) > 0 and stack[-1] == other_pair:
+                stack.pop()
+            else:
+                return False
+        else:
+            return False
+    if len(stack) == 0:
         return True
     else:
         return False
 
-string = "([])(){}(())()()"
-print(isBalanced(string))
-
-
+str1 = "())"
+str2 = "([])(){()}(())()()"
+print(isBalanced(str1))
+print(isBalanced(str2))
