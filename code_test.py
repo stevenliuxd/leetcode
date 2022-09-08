@@ -1,10 +1,8 @@
-apples = ["nihao", "str"]
-lst = []
 
-for x in apples:
-    if "n" in x:
-        lst.append(x)
+stack = []
+stack.append(1)
+stack.append(2)
+stack.append(3)
+stack.pop()
 
-print(lst)
-
-tst = [x for x in apples if "n" in x]
+print(stack)
