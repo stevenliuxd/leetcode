@@ -1,8 +1,8 @@
+a = 6
+b = 5
 
-stack = []
-stack.append(1)
-stack.append(2)
-stack.append(3)
-stack.pop()
+def ass(a, b):
+    if b < a:
+        return True
 
-print(stack)
+print(ass(a, b))

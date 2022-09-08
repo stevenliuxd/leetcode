@@ -43,7 +43,30 @@ def getmaxDiameter(root):
         return 1 + max(left, right)
     dfs(root)
     return a[0]
+
+def dfs(root, list1):
+    if not root:
+        return
     
-print(findSum(l1))
-print(getHeight(l1))
-print(getmaxDiameter(l1))
+    dfs(root.left, list1)
+    dfs(root.right, list1)
+
+    list1.append(root.val)
+    return
+    
+def helper(root, min_value, max_value):
+    if not root:
+        return True
+    if root.val < min_value or root.val > max_value:
+        return False
+    return helper(root.left, min_value, root.val-1) and helper(root.right, root.val+1, max_value)
+
+def isBinSearchTree(root):
+    ranges = [0, 10000]
+    return helper(root, ranges[0], ranges[1])
+
+#print(findSum(l1))
+#print(getHeight(l1))
+#print(getmaxDiameter(l1))
+print(isBinSearchTree(l1))
+
