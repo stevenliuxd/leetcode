@@ -28,22 +28,23 @@ l2r.left = l3r1
 l2r.right = l3r2
 l3l2.right = l4l
 
-
 def findSum(root):
     if root is None:
         return 0
     else:
         return root.val + findSum(root.left) + findSum(root.right)
 
-def getHeight(root):
-    if root is None:
+height = [0]
+def getHeight(root, x):
+    if not root:
         return -1
-    return 1 + max(getHeight(root.left), getHeight(root.right))
-
-def getDepth(root):
-    if root is None:
-        return 0
-    return 1 + max(getHeight(root.left), getHeight(root.right))
+    left = getHeight(root.left, x)
+    right = getHeight(root.right, x)
+    if root.val == x:
+        height[0] = 1 + max(left, right)
+    return 1 + max(left, right)
+getHeight(l1, 5)
+print(height[0])
 
 def getmaxDiameter(root):
 
@@ -61,31 +62,14 @@ def getmaxDiameter(root):
 def dfs(root, list1):
     if not root:
         return
-    
     dfs(root.left, list1)
     dfs(root.right, list1)
     list1.append(root.val)
+    return root.val
 
-    return list1
-    
-def helper(root, min_value, max_value):
-    if not root:
-        return True
-    if root.val < min_value or root.val > max_value:
-        return False
-    return helper(root.left, min_value, root.val-1) and helper(root.right, root.val+1, max_value)
+#list1 = []
+#print(dfs(l1, list1))
+#print(list1)
 
-def isBinSearchTree(root):
-    ranges = [0, 10000]
-    return helper(root, ranges[0], ranges[1])
-
-#print(findSum(l1))
-#print(getHeight(l3l2))
-#print(getDepth(l1))
-#print(test.right.val)
-#print(getmaxDiameter(l1))
-list1 = []
-print(dfs(l1, list1))
-#print(isBinSearchTree(l1))
 
 
