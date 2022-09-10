@@ -1,8 +1,2 @@
-a = 6
-b = 5
-
-def ass(a, b):
-    if b < a:
-        return True
-
-print(ass(a, b))
+for i in range(0):
+    print(i)
