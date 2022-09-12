@@ -34,6 +34,21 @@ def findSum(root):
     else:
         return root.val + findSum(root.left) + findSum(root.right)
 
+def getDepth(root, x):
+    if not root:
+        return -1
+    dist = -1
+    if root.val == x:
+        return dist + 1
+    dist = getDepth(root.left, x)
+    if dist >= 0:
+        return dist + 1
+    dist = getDepth(root.right, x)
+    if dist >= 0:
+        return dist + 1
+    return dist
+print(getDepth(l1, 25))
+
 height = [0]
 def getHeight(root, x):
     if not root:
@@ -43,8 +58,8 @@ def getHeight(root, x):
     if root.val == x:
         height[0] = 1 + max(left, right)
     return 1 + max(left, right)
-getHeight(l1, 5)
-print(height[0])
+#getHeight(l1, 5)
+#print(height[0])
 
 def getmaxDiameter(root):
 
